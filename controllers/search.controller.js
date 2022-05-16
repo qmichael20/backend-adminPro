@@ -31,17 +31,17 @@ const getDocuments = async (req, res = response) => {
 
   switch (collection) {
     case "users":
-      data = await User.find({ name: regex })
-        .populate("users", "name img")
-        .populate("hospitals", "name img");
+      data = await User.find({ name: regex });
 
       break;
     case "doctors":
-      data = await Doctor.find({ name: regex }).populate("user", "name img");
+      data = await Doctor.find({ name: regex })
+        .populate("user", "name img")
+        .populate("hospital", "name img");
       break;
 
     case "hospitals":
-      data = await Hospital.find({ name: regex });
+      data = await Hospital.find({ name: regex }).populate("user", "name img");
       break;
 
     default:
